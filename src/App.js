@@ -1,3 +1,8 @@
+import React from 'react';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const App = () => {
   return (
     <div className="App">
