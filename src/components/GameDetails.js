@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { smallImage } from '../util';
 // Styles and animations
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -42,7 +43,7 @@ const GameDetails = () => {
             </Stats>
             <Media>
               <img
-                src={gameDetails.background_image}
+                src={smallImage(gameDetails.background_image, 1280)}
                 alt={gameDetails.background_image}
               />
             </Media>
@@ -51,7 +52,11 @@ const GameDetails = () => {
             </Description>
             <div className="gallery">
               {gameScreenshots.results.map(data => (
-                <img key={data.id} src={data.image} alt={data.image} />
+                <img
+                  key={data.id}
+                  src={smallImage(data.image, 1280)}
+                  alt={data.image}
+                />
               ))}
             </div>
           </Details>
