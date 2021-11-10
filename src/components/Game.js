@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { loadDetails } from '../actions/detailsAction';
 
 const Game = ({ name, releaseDate, image, id }) => {
+  const stringPathId = id.toString();
   // Load game details
   const dispatch = useDispatch();
 
@@ -18,11 +19,15 @@ const Game = ({ name, releaseDate, image, id }) => {
   };
 
   return (
-    <StyledGame onClick={loadDetailsHandler}>
+    <StyledGame layoutId={stringPathId} onClick={loadDetailsHandler}>
       <Link to={`game/${id}`}>
-        <h3>{name}</h3>
+        <motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
         <p>{releaseDate}</p>
-        <img src={smallImage(image, 640)} alt={name} />
+        <motion.img
+          layoutId={`image ${stringPathId}`}
+          src={smallImage(image, 640)}
+          alt={name}
+        />
       </Link>
     </StyledGame>
   );
