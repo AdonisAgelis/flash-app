@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 // Styles and animations
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -6,6 +7,15 @@ import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 
 const GameDetails = () => {
+  const history = useHistory();
+  // Exit Details Card
+  const exitDetailsHandler = e => {
+    const element = e.target;
+    if (element.classList.contains('shadow')) {
+      document.body.style.overflow = 'auto';
+      history.push('/');
+    }
+  };
   // Get data
   const { gameDetails, gameScreenshots, isLoading } = useSelector(
     state => state.detailsReducer
@@ -14,7 +24,7 @@ const GameDetails = () => {
   return (
     <>
       {!isLoading && (
-        <CardShadow>
+        <CardShadow className="shadow" onClick={exitDetailsHandler}>
           <Details>
             <Stats>
               <div className="rating">
