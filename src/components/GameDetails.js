@@ -13,9 +13,16 @@ import steam from '../img/steam.svg';
 import nintendo from '../img/nintendo.svg';
 import apple from '../img/apple.svg';
 import gamepad from '../img/gamepad.svg';
+// Star ratings
+import starEmpty from '../img/star-empty.png';
+import starFull from '../img/star-full.png';
 
 const GameDetails = ({ pathId }) => {
   const history = useHistory();
+  // Get game data
+  const { gameDetails, gameScreenshots, isLoading } = useSelector(
+    state => state.detailsReducer
+  );
   // Exit Details Card
   const exitDetailsHandler = e => {
     const element = e.target;
@@ -47,10 +54,19 @@ const GameDetails = ({ pathId }) => {
         return gamepad;
     }
   };
-  // Get data
-  const { gameDetails, gameScreenshots, isLoading } = useSelector(
-    state => state.detailsReducer
-  );
+  // Configure star ratings
+  const getRating = () => {
+    const stars = [];
+    const rating = Math.round(gameDetails.rating);
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<img src={starFull} alt="star" key={i}></img>);
+      } else {
+        stars.push(<img src={starEmpty} alt="star" key={i}></img>);
+      }
+    }
+    return stars;
+  };
 
   return (
     <>
@@ -63,6 +79,7 @@ const GameDetails = ({ pathId }) => {
                   {gameDetails.name}
                 </motion.h3>
                 <p>Rating: {gameDetails.rating}</p>
+                {getRating()}
               </div>
               <Info>
                 <h3>Platforms</h3>
@@ -144,10 +161,15 @@ const Stats = styled(motion.div)`
   #gameName {
     font-size: 2rem;
   }
+  img {
+    width: 2rem;
+    height: 2rem;
+    display: inline;
+  }
 `;
 
 const Info = styled(motion.div)`
-  text-align: center;
+  text-align: right;
 `;
 
 const Platforms = styled(motion.div)`
