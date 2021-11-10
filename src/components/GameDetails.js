@@ -6,6 +6,13 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 // Redux
 import { useSelector } from 'react-redux';
+// Platform icons
+import playstation from '../img/playstation.svg';
+import xbox from '../img/xbox.svg';
+import steam from '../img/steam.svg';
+import nintendo from '../img/nintendo.svg';
+import apple from '../img/apple.svg';
+import gamepad from '../img/gamepad.svg';
 
 const GameDetails = ({ pathId }) => {
   const history = useHistory();
@@ -15,6 +22,29 @@ const GameDetails = ({ pathId }) => {
     if (element.classList.contains('shadow')) {
       document.body.style.overflow = 'auto';
       history.push('/');
+    }
+  };
+  // Configure platform icons
+  const getPlatform = platform => {
+    switch (platform) {
+      case 'PlayStation 4':
+        return playstation;
+      case 'PlayStation 5':
+        return playstation;
+      case 'Xbox Series S/X':
+        return xbox;
+      case 'Xbox S':
+        return xbox;
+      case 'Xbox One':
+        return xbox;
+      case 'PC':
+        return steam;
+      case 'Nintendo Switch':
+        return nintendo;
+      case 'iOS':
+        return apple;
+      default:
+        return gamepad;
     }
   };
   // Get data
@@ -29,7 +59,7 @@ const GameDetails = ({ pathId }) => {
           <Details layoutId={pathId}>
             <Stats>
               <div className="rating">
-                <motion.h3 layoutId={`title ${pathId}`}>
+                <motion.h3 id="gameName" layoutId={`title ${pathId}`}>
                   {gameDetails.name}
                 </motion.h3>
                 <p>Rating: {gameDetails.rating}</p>
@@ -38,7 +68,11 @@ const GameDetails = ({ pathId }) => {
                 <h3>Platforms</h3>
                 <Platforms>
                   {gameDetails.platforms.map(data => (
-                    <h3 key={data.platform.id}>{data.platform.name}</h3>
+                    <img
+                      title={data.platform.name}
+                      key={data.platform.id}
+                      src={getPlatform(data.platform.name)}
+                      alt={data.platform.name}></img>
                   ))}
                 </Platforms>
               </Info>
@@ -97,6 +131,7 @@ const Details = styled(motion.div)`
   position: absolute;
   left: 10%;
   color: black;
+  z-index: 10;
   img {
     width: 100%;
   }
@@ -106,6 +141,9 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  #gameName {
+    font-size: 2rem;
+  }
 `;
 
 const Info = styled(motion.div)`
