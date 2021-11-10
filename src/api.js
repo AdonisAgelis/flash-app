@@ -25,6 +25,13 @@ const popularGames = `&dates=${lastYear},${currentDate}&ordering=-rating&page_si
 const newGames = `&dates${lastYear},${currentDate}&ordering=-released&page_size=10`;
 const upcomingGames = `&dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
 
+// API calls for games
 export const popularGamesURL = () => `${base_url}${popularGames}`;
 export const newGamesURL = () => `${base_url}${newGames}`;
 export const upcomingGamesURL = () => `${base_url}${upcomingGames}`;
+// API call for games' details
+export const gameDetailsURL = game_id =>
+  `https://api.rawg.io/api/games/${game_id}?key=${process.env.REACT_APP_API_KEY}`;
+// API call for games' screenshots
+export const screenshotsURL = game_id =>
+  `https://api.rawg.io/api/games/${game_id}/screenshots?key=${process.env.REACT_APP_API_KEY}`;
