@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The Flash web application is hosted at:
+The Flash web application is hosted at: https://flash-app.netlify.app
 
 ## Available Scripts
 
