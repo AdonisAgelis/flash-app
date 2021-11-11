@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // Animations
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { fadeIn } from '../animations';
 // Redux and Routes
 import { searchGames } from '../actions/gamesAction';
 import { useDispatch } from 'react-redux';
@@ -27,7 +28,7 @@ const Nav = () => {
   };
 
   return (
-    <StyledNav>
+    <StyledNav variants={fadeIn} initial="hidden" animate="show">
       <h1 onClick={clearSearch}>Flash</h1>
       <form className="search">
         <input onChange={inputHandler} value={textInput} type="text" />
